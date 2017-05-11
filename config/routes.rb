@@ -5,6 +5,21 @@ Rails.application.routes.draw do
   resources :products, only: [:index, :show]
   resources :categories, only: [:show]
 
+  get '/login' => 'sessions#new'
+  post '/login' => 'sessions#create'
+  get '/logout' => 'sessions#destroy'
+
+  get '/signup' => 'users#new'
+  post '/users' => 'users#create'
+
+
+  # resources :users do
+  #   get :signup
+  #   post :users
+  # end
+
+  # resources :sessions, path_names: { new: 'login', create: 'login', destroy: 'logout' }
+
   resource :cart, only: [:show] do
     put    :add_item
     delete :remove_item
