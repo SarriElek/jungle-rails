@@ -6,6 +6,11 @@
 
   <div class="well">
     <%= link_to '+ New Product', [:new, :admin, :product], class: 'btn btn-info' %>
+
+    <% if flash[:notice] %>
+        <span class="alert alert-success pull-right cat-message"><%= flash[:notice] %></span>
+    <% end %>
+
   </div>
 
   <div class="panel panel-default products">
