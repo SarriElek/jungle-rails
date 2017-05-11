@@ -13,12 +13,10 @@ Rails.application.routes.draw do
   post '/users' => 'users#create'
 
 
-  # resources :users do
-  #   get :signup
-  #   post :users
-  # end
-
-  # resources :sessions, path_names: { new: 'login', create: 'login', destroy: 'logout' }
+  # resource :login, controller: 'sessions', only: [:new, :create]
+  # resource :logout, controller: 'sessions', only: [:destroy]
+  # resource :signup, controller: 'users', only: [:new]
+  # resources :users, only: [:create]
 
   resource :cart, only: [:show] do
     put    :add_item
