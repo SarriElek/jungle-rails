@@ -35,7 +35,7 @@ puts "Re-creating Products ..."
 
 Product.destroy_all
 
-cat1.products.create!({
+p1 = cat1.products.create!({
   name:  'Men\'s Classy shirt',
   description: Faker::Hipster.paragraph(4),
   image: open_asset('apparel1.jpg'),
@@ -43,7 +43,7 @@ cat1.products.create!({
   price: 64.99
 })
 
-cat1.products.create!({
+p2 = cat1.products.create!({
   name:  'Women\'s Zebra pants',
   description: Faker::Hipster.paragraph(4),
   image: open_asset('apparel2.jpg'),
@@ -51,7 +51,7 @@ cat1.products.create!({
   price: 124.99
 })
 
-cat1.products.create!({
+p3 = cat1.products.create!({
   name:  'Hipster Hat',
   description: Faker::Hipster.paragraph(4),
   image: open_asset('apparel3.jpg'),
@@ -130,6 +130,64 @@ cat3.products.create!({
   image: open_asset('furniture3.jpg'),
   quantity: 23,
   price: 2_483.75
+})
+
+## USERS
+puts "Re-creating Users ..."
+
+user1 = User.create({
+  first_name: "Edurne",
+  last_name: "Berastegi",
+  email: "edurne@gmail.com",
+  password_digest: "$2a$10$Zb1pHytYNRwIhxefwnDii.i9vNu6MAy4oZaiBVaf0IkACj/T2s.fi"
+  })
+user2 = User.create({
+  first_name: "Javier",
+  last_name: "Kimball",
+  email: "javier@gmail.com",
+  password_digest: "$2a$10$Zb1pHytYNRwIhxefwnDii.i9vNu6MAy4oZaiBVaf0IkACj/T2s.fi"
+  })
+
+## REVIEWS
+
+puts "Re-creating Reviews ..."
+
+Review.destroy_all
+
+p1.reviews.create!({
+  description: Faker::Hipster.paragraph(3),
+  rating: 2,
+  user_id: user1.id
+})
+
+p1.reviews.create!({
+  description: Faker::Hipster.paragraph(2),
+  rating: 4,
+  user_id: user2.id
+})
+
+p2.reviews.create!({
+  description: Faker::Hipster.paragraph(3),
+  rating: 2,
+  user_id: user1.id
+})
+
+p2.reviews.create!({
+  description: Faker::Hipster.paragraph(2),
+  rating: 4,
+  user_id: user2.id
+})
+
+p3.reviews.create!({
+  description: Faker::Hipster.paragraph(3),
+  rating: 2,
+  user_id: user1.id
+})
+
+p3.reviews.create!({
+  description: Faker::Hipster.paragraph(2),
+  rating: 4,
+  user_id: user2.id
 })
 
 

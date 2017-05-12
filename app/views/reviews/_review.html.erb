@@ -1,0 +1,19 @@
+<% rating = review.rating %>
+<div class="review">
+  <dl class="dl-horizontal">
+    <dt>Rating</dt>
+    <dd>
+      <% while rating > 0 %>
+        <span class="text-danger"><%= fa_icon 'heart'%></span>
+      <% rating -= 1 %>
+      <% end %>
+    </dd>
+    <dt>Review</dt>
+    <dd><%= review.description %></dd>
+    <dt>User</dt>
+    <dd><%= review.user.email %></dd>
+    <% if current_user.present? && current_user.id == review.user.id %>
+    <dd><%= link_to fa_icon('trash'), review_path(id: review.id), class: 'btn btn-sm btn-danger', method: :delete, data: {id: review.id ,confirm: "Are you sure?" } %></dd>
+    <% end %>
+  </dl>
+</div>

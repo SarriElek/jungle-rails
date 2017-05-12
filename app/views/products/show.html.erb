@@ -26,6 +26,27 @@
       </div>
     </div>
 
-  </article>
+    <div class="row">
+      <div class="col-sm-12">
+        <h4>Product Reviews</h4>
+        <% if current_user.present? %>
+          <%= form_for [@product, @review] do |f| %>
+            <p><%= label_tag(:rating, "Rating") %></p>
+            <p><%= number_field(:review, :rating, in: 1..5, step: 1) %></p>
+            <p><%= label_tag(:description, "Description") %></p>
+            <p><%= text_area(:review, :description, size: "50x3") %></p>
+            <p><%= submit_tag("Submit") %></p>
+          <% end %>
+        <% end %>
+         <% if flash[:alert] %>
+            <span class="alert alert-danger pull-right flash-message"><%= flash[:alert] %><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></span>
+        <% end %>
 
+        <% if flash[:notice] %>
+            <span class="alert alert-success pull-right flash-message"><%= flash[:notice] %><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button></span>
+        <% end %>
+        <%= render @product.reviews.order("created_at DESC") %>
+      </div>
+    </div>
+  </article>
 </section>
