@@ -1,5 +1,11 @@
 <section class="cart-show">
 
+<% if cart.empty? %>
+  <div class="well">
+    <span>You have no items in your shopping cart, you can start shopping in our home page</span>
+    <%= link_to 'Home', :root ,class: 'btn btn-info pull-right home-button'%>
+  </div>
+<% else %>
   <header class="page-header">
     <h1>My Cart</h1>
   </header>
@@ -49,5 +55,7 @@
       <% end %>
     </div>
   </div>
+
+<% end %>
 
 </section>
