@@ -7,4 +7,15 @@ class Order < ActiveRecord::Base
 
   validates :stripe_charge_id, presence: true
 
+  after_create :update_product_quantities
+
+  private
+
+  def update_product_quantities
+    line_items.each {
+      |item|
+       item.product.update(quantity: )
+       }
+  end
+
 end
