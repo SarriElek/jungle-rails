@@ -12,7 +12,7 @@ RSpec.describe Order, type: :model do
                           quantity: @initial_quantity,
                           image: open_asset('apparel1.jpg'),
                           price: Faker::Number.decimal(2))
-      @product2 = Product.create!(name: Faker::Hipster.word,
+      @product2 = Product.create!( name: Faker::Hipster.word,
                           description: Faker::Hipster.paragraph(3),
                           category_id: cat1.id,
                           quantity: @initial_quantity,
@@ -26,10 +26,8 @@ RSpec.describe Order, type: :model do
                           quantity: @initial_quantity,
                           image: open_asset('apparel1.jpg'),
                           price: Faker::Number.decimal(2))
-    end
 
-    it 'deducts quantity from products based on their line item quantities' do
-      @order = Order.new(
+       @order = Order.new(
                     email: Faker::Internet.free_email,
                     total_cents: Faker::Number.decimal(2),
                     stripe_charge_id: Faker::Number.digit)
@@ -47,14 +45,18 @@ RSpec.describe Order, type: :model do
 
       @product1.reload
       @product2.reload
+      @product_out.reload
 
+    end
+
+    it 'deducts quantity from products based on their line item quantities' do
       expect(@product1.quantity).to eql(@initial_quantity - @product_quantity)
       expect(@product2.quantity).to eql(@initial_quantity - @product_quantity)
 
     end
 
-    xit 'does not deduct quantity from products that are not in the order' do
-      # TODO: Implement based on hints in previous test
+    it 'does not deduct quantity from products that are not in the order' do
+      expect(@product_out.quantity).to eql(@initial_quantity)
     end
   end
 end

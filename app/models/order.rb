@@ -12,10 +12,7 @@ class Order < ActiveRecord::Base
   private
 
   def update_product_quantities
-    line_items.each {
-      |item|
-       item.product.update(quantity: )
-       }
+    line_items.each { |item| item.product.update(quantity: item.product.quantity - item.quantity) }
   end
 
 end
